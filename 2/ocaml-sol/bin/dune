@@ -1,0 +1,4 @@
+(executable
+ (public_name ocaml-sol)
+ (name main)
+ (libraries str ocaml_sol))
