@@ -1,0 +1,3 @@
+make:
+	g++ -g -o main main.cpp
+	./main
