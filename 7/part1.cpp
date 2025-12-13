@@ -50,8 +50,6 @@ int main()
 
     double total_sum = 0;
 
-    std::vector<std::vector<int>> band_timelines(num_lines, std::vector<int>(line_length));
-
     for(size_t line_i = 1; line_i < num_lines; line_i++)
     {
         //gonna use the vec of strings as the data structure, gonna update it drawing the lines as we should.
@@ -63,15 +61,9 @@ int main()
         {
             char cur_char = cur_line[char_i];
             char above_char = prev_line[char_i];
-            if(cur_char == '.' && above_char == 'S')
+            if(cur_char == '.' && (above_char == '|' || above_char == 'S'))
             {
                 cur_line[char_i] = '|';
-                band_timelines[line_i][char_i] = 1;
-            }
-            else if(cur_char == '.' && above_char == '|')
-            {
-                cur_line[char_i] = '|';
-                band_timelines[line_i][char_i] = band_timelines[line_i-1][char_i];
             }
         }
 
@@ -82,15 +74,20 @@ int main()
             char above_char = prev_line[char_i];
             if(cur_char == '^' && above_char == '|')
             {
+                total_sum += 1;
                 if(char_i > 0)
                 {
-                    cur_line[char_i-1] = '|';
-                    band_timelines[line_i][char_i-1] += band_timelines[line_i-1][char_i];
+                    if(cur_line[char_i-1] != '|')
+                    {
+                        cur_line[char_i-1] = '|';
+                    }
                 }
                 if(char_i < line_length - 1)
                 {
-                    cur_line[char_i+1] = '|';
-                    band_timelines[line_i][char_i+1] += band_timelines[line_i-1][char_i];
+                    if(cur_line[char_i+1] != '|')
+                    {
+                        cur_line[char_i+1] = '|';
+                    }
                 }
             }
         }
@@ -100,11 +97,6 @@ int main()
 
     write_lines(lines);
 
-
-    for(auto val : band_timelines[num_lines-1])
-    {
-        total_sum += val;
-    }
     std::cout << std::fixed << std::setprecision(0);
     std::cout << "Total: " << total_sum << std::endl;
     return 0;
