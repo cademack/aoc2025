@@ -135,8 +135,8 @@ int count_number_rows(std::ifstream& file)
 
 int main()
 {
-    // std::ifstream inputFile("example.txt");
-    std::ifstream inputFile("input.txt");
+    std::ifstream inputFile("example.txt");
+    // std::ifstream inputFile("input.txt");
 
     if (!inputFile.is_open())
     {

@@ -132,8 +132,8 @@ int count_values(std::ifstream& file)
 
 int main()
 {
-    // std::ifstream inputFile("example.txt");
-    std::ifstream inputFile("input.txt");
+    std::ifstream inputFile("example.txt");
+    // std::ifstream inputFile("input.txt");
     std::stringstream ss;
 
     if (!inputFile.is_open())
